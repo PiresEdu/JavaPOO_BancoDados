@@ -1,4 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 public class Pessoa {
+
     private int codigo;
     private String nome;
     private String fone;
@@ -49,6 +54,27 @@ public class Pessoa {
     public String toString() {
         return "Pessoa{" + "codigo=" + codigo + ", nome=" + nome + ", fone=" + fone + ", email=" + email + '}';
     }
-    
-    
+
+    public boolean cadastrar() {
+        //Definir comando SQL
+        String sql = "INSERT INTO tb pessoa (nome, fone, email) VALUES (?, ?, ?)";
+        //Abrindo Conexão como recurso do try
+        try (Connection c = ConnectionFactory.obtemConexao()) {
+            //Pré compilar o comando SQL
+            PreparedStatement ps = c.prepareStatement(sql);
+            //PReencher com valores o statement SQL
+            ps.setString(1, nome);
+            ps.setString(2, fone);
+            ps.setString(3, email);
+            //Executa o comando
+            ps.execute();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
 }
