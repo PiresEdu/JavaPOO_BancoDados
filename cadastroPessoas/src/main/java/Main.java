@@ -1,43 +1,50 @@
 import javax.swing.JOptionPane;
 
 public class Main {
-
+    
     static int menu() {
-        String msg = " Escolha sua opcao:\n 1 - Cadastrar\n 2 - Atualizar\n 3 - Apagar\n 4 - Exibir pessoas\n 0 - Sair";
-
-        int opcao = Integer.parseInt(JOptionPane.showInputDialog(msg));
-
+        int opcao;
+        do {
+            String msg = """
+                         Escolha sua op\u00e7\u00e3o:
+                         1 - cadastrar
+                         2 - atualizar
+                         3 - apagar uma pessoa
+                         4 - exibir pessoas
+                         0 - sair""";
+            opcao = Integer.parseInt(JOptionPane.showInputDialog(msg));
+        } while (opcao < 0 || opcao > 4);
         return opcao;
     }
 
-    public static void main(String args[]) {
-        int op = menu();
+    public static void main (String args[]) {
+        int op;
         do {
+            op = menu();
             switch (op) {
-                case 1:
-                    String nome = JOptionPane.showInputDialog(" Digite o nome: ");
-                    String email = JOptionPane.showInputDialog(" Digite o email: ");
-                    String fone = JOptionPane.showInputDialog(" Digite o fone:");
+                case 1 -> { 
+                    String nome = JOptionPane.showInputDialog(" Digite o nome");
+                    String email = JOptionPane.showInputDialog(" Digite email");
+                    String fone = JOptionPane.showInputDialog(" Digite fone");
                     Pessoa p = new Pessoa(nome, fone, email);
                     if (p.cadastrar()) {
-                        JOptionPane.showMessageDialog(null, " Cadastro realizado com sucesso");
-                    } else {
-                        JOptionPane.showMessageDialog(null, " Cadastro falhou");
+                        JOptionPane.showMessageDialog(null, " Cadastro realizado com sucesso :) ");
                     }
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-
-                    break;
-                case 0:
-                    JOptionPane.showMessageDialog(null, "Obrigado, Volte Sempre");
-
+                    else {
+                        JOptionPane.showMessageDialog(null, " Cadastro falhou :( ");
+                    }
+                }
+                case 2 -> {
+                }
+                case 3 -> {
+                }
+                case 4 -> {
+                    Pessoa p = new Pessoa();
+                    JOptionPane.showMessageDialog(null, p.listarPessoas());
+                }
+                case 0 -> JOptionPane.showMessageDialog(null, "Obrigado, volte sempre!");
             }
-        } while (op != 0);
+        }while (op != 0);
     }
+    
 }

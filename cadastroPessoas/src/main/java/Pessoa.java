@@ -1,6 +1,7 @@
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Pessoa {
 
@@ -57,7 +58,7 @@ public class Pessoa {
 
     public boolean cadastrar() {
         //Definir comando SQL
-        String sql = "INSERT INTO tb pessoa (nome, fone, email) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO tb_pessoa (nome, fone, email) VALUES (?, ?, ?)";
         //Abrindo Conexão como recurso do try
         try (Connection c = ConnectionFactory.obtemConexao()) {
             //Pré compilar o comando SQL
@@ -76,5 +77,25 @@ public class Pessoa {
         }
 
     }
-
+    public String listarPessoas(){
+        String sql = "SELECT * FROM tb_pessoa";
+        String s = "";
+        try (Connection c = ConnectionFactory.obtemConexao()){
+            PreparedStatement ps = c.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                int codigo = rs.getInt("codigo");
+                String nome = rs.getString("nome");
+                String fone = rs.getString("fone");
+                String email = rs.getString("email");
+                s += "codigo" + codigo + "nome" + nome + "fone" + fone + "email" + email + "\n";
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            s += "erro na consulta";
+        }
+        return s;
+    }
+    
 }
