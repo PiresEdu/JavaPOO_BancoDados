@@ -35,6 +35,15 @@ public class Main {
                     }
                 }
                 case 2 -> {
+                    String nome = JOptionPane.showInputDialog(" Digite o nome");
+                    Pessoa p = new Pessoa(nome);
+                    if (p.buscarPessoa()){
+                    
+                    } 
+                    else {
+                        JOptionPane.showMessageDialog(null, " Usuario nao encontrado");
+                    }
+                   
                 }
                 case 3 -> {
                 }

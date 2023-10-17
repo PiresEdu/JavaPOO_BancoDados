@@ -10,6 +10,10 @@ public class Pessoa {
     private String fone;
     private String email;
 
+    public Pessoa(String nome) {
+        this.nome = nome;
+    }
+    
     public Pessoa(String nome, String fone, String email) {
         this.nome = nome;
         this.fone = fone;
@@ -97,5 +101,40 @@ public class Pessoa {
         }
         return s;
     }
+    public boolean atualizar(){
+        String sql = "UPDATE tb pessoa SET nome=?, fone=?, email=? WHERE codigo=?";
+        try (Connection c = ConnectionFactory.obtemConexao()){
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1,nome);
+            ps.setString(2, fone);
+            ps.setString(3,email);
+            ps.setInt(4,codigo);
+            ps.execute();
+            return true;
+        }
+        catch (Exception e){  
+            e.printStackTrace();
+            return false;
+        }
     
+    }
+    public boolean buscarPessoa(){
+        boolean achou = false;
+        String sql = "SELECT * FROM tb_pessoa WHERE nome = ?";
+        try (Connection c = ConnectionFactory.obtemConexao()){
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, nome);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                codigo = rs.getInt("codigo");
+                fone = rs.getString("fone");
+                email = rs.getString("email");
+                achou = true;
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return achou;
+    }
 }
