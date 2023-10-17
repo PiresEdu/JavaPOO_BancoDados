@@ -38,7 +38,7 @@ public class Main {
                     String nome = JOptionPane.showInputDialog(" Digite o nome");
                     Pessoa p = new Pessoa(nome);
                     if (p.buscarPessoa()){
-                    
+                    // Terminar dia 17/10/23
                     } 
                     else {
                         JOptionPane.showMessageDialog(null, " Usuario nao encontrado");
