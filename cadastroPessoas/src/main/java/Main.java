@@ -6,7 +6,7 @@ public class Main {
         int opcao;
         do {
             String msg = """
-                         Escolha sua op\u00e7\u00e3o:
+                         Escolha sua opcao:
                          1 - cadastrar
                          2 - atualizar
                          3 - apagar uma pessoa
@@ -38,8 +38,8 @@ public class Main {
                     String nome = JOptionPane.showInputDialog(" Digite o nome");
                     Pessoa p = new Pessoa(nome);
                     if (p.buscarPessoa()){
-                    // Terminar dia 17/10/23
-                    } 
+                     
+                   } 
                     else {
                         JOptionPane.showMessageDialog(null, " Usuario nao encontrado");
                     }
